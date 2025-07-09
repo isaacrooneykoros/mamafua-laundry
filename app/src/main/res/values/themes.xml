@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.TheFinalDedication" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Base application theme -->
+        <!-- Primary brand color -->
+        <item name="colorPrimary" type="color">@color/laundry_blue</item>
+        <item name="colorPrimaryVariant" type="color">@color/laundry_dark_blue</item>
+        <item name="colorOnPrimary" type="color">@color/white</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary" type="color">@color/laundry_orange</item>
+        <item name="colorSecondaryVariant" type="color">@color/laundry_orange</item>
+        <item name="colorOnSecondary" type="color">@color/white</item>
+
+        <!-- Status bar color -->
+        <item name="statusBarColor" type="color">@color/laundry_dark_blue</item>
+
+        <!-- Background colors -->
+        <item name="colorBackground" type="color">@color/background_primary</item>
+
+        <!-- Text colors -->
+        <item name="textColorPrimary" type="color">@color/text_primary</item>
+        <item name="textColorSecondary" type="color">@color/text_secondary</item>
+
+        <!-- Custom attributes for your app -->
+        <item name="cancelledColor" type="color">@color/laundry_red</item>
+
+</resources>

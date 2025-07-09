@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "543762520817",
+    "project_id": "the-final-dedication",
+    "storage_bucket": "the-final-dedication.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543762520817:android:76a72ab5791daaf7a9e750",
+        "android_client_info": {
+          "package_name": "com.example.thefinaldedication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiTuU8ZT6aLPqXULaLqVCtkT9tpcUrHbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
