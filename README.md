@@ -47,7 +47,7 @@ MPESA_INITIATOR_NAME=your_initiator_name
 
 MPESA_INITIATOR_PASSWORD=your_initiator_password
 
-MPESA_CALLBACK_URL=https://mpesa.com/api/mpesa/callback
+MPESA_CALLBACK_URL= YOUR CALLBACK URL
 
 MPESA_ENV=sandbox  # or 'production'
 
