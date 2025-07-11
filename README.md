@@ -36,12 +36,19 @@ MAPS_API_KEY=your_google_maps_key
 
 # M-Pesa STK Push (Safaricom Daraja API)
 MPESA_CONSUMER_KEY=your_safaricom_consumer_key
+
 MPESA_CONSUMER_SECRET=your_safaricom_consumer_secret
+
 MPESA_SHORTCODE=your_paybill_or_till_number
+
 MPESA_PASSKEY=your_safaricom_passkey
+
 MPESA_INITIATOR_NAME=your_initiator_name
+
 MPESA_INITIATOR_PASSWORD=your_initiator_password
+
 MPESA_CALLBACK_URL=https://yourdomain.com/api/mpesa/callback
+
 MPESA_ENV=sandbox  # or 'production'
 
 
