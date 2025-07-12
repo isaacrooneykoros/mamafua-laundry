@@ -16,7 +16,7 @@ import com.example.thefinaldedication.cart.CartItem
 import com.example.thefinaldedication.models.Users
 
 @Composable
-fun AppNavHost(navController: NavHostController, startDestination: String = ROUT_PAYMENT) {
+fun AppNavHost(navController: NavHostController, startDestination: String = ROUT_LAUNDRY) {
     NavHost(
         navController = navController,
         startDestination = startDestination

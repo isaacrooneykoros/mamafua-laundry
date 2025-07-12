@@ -1,9 +1,6 @@
+// Laundry.kt
+package com.example.thefinaldedication.Laundry
 
-@file:Suppress("DEPRECATION")
-
-package com.example.thefinaldedication.Homepage
-
-import android.R.attr.onClick
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -14,30 +11,26 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.thefinaldedication.Laundry.CheckoutButton
-import com.example.thefinaldedication.Laundry.LaundryFilter
-import com.example.thefinaldedication.Laundry.LaundryFilterItem
-import com.example.thefinaldedication.Laundry.LaundryItem
-import com.example.thefinaldedication.Laundry.LaundryListItem
-import com.example.thefinaldedication.navigation.ROUT_HOME
-import com.example.thefinaldedication.navigation.ROUT_PAYMENT
-import kotlin.collections.listOf
+import androidx.navigation.compose.rememberNavController
+import com.example.thefinaldedication.cart.CartItem
+import com.example.thefinaldedication.navigation.ROUT_CART
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Laundry( navController: NavController) {
-    val itemCountState = remember { mutableIntStateOf(0) }
+fun Laundry(navController: NavController, cartViewModel: CartViewModel = viewModel()) {
+    // Collect the cart items and calculate the total item count and total price
+    val itemCount by cartViewModel.cartItems.collectAsState(initial = emptyList()).map { cartItems ->
+        cartItems.sumOf { cartItem -> cartItem.quantity }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -50,7 +43,7 @@ fun Laundry( navController: NavController) {
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate(ROUT_HOME) }) {
+                    IconButton(onClick = { navController.navigateUp() }) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
@@ -58,11 +51,11 @@ fun Laundry( navController: NavController) {
                 actions = {}
             )
         },
-       bottomBar = {
-           CheckoutButton(itemCount = itemCountState.intValue)
-       },
+        bottomBar = {
+            CheckoutButton(itemCount = itemCount, navController = navController, cartViewModel = cartViewModel)
+        },
         floatingActionButton = {
-            FloatingActionButton(onClick = { navController.navigate(ROUT_HOME) }) {
+            FloatingActionButton(onClick = { navController.navigate(ROUT_CART) }) {
                 Icon(Icons.Default.ShoppingCart, contentDescription = "Cart")
             }
         }
@@ -87,7 +80,6 @@ fun Laundry( navController: NavController) {
             )
             val filterCategories = listOf("Men", "Women", "Kids", "Bedding")
             val (selectedFilter, setSelectedFilter) = remember { mutableIntStateOf(0) }
-
 
             Spacer(modifier = Modifier.size(18.dp))
             // Search Bar
@@ -122,7 +114,7 @@ fun Laundry( navController: NavController) {
                 selectedIndex = selectedFilter,
                 onFilterSelected = { index -> setSelectedFilter(index) }
             )
-            //Laundry Items
+            // Laundry Items
             // Laundry Items List
             val laundryItems = listOf(
                 LaundryItem(
@@ -165,7 +157,7 @@ fun Laundry( navController: NavController) {
                     "Jacket",
                     200.0,
                     com.example.thefinaldedication.R.drawable.jacket,
-                    listOf("Men", "Women","Kids")
+                    listOf("Men", "Women", "Kids")
                 ),
                 LaundryItem(
                     "Undergarments",
@@ -179,7 +171,7 @@ fun Laundry( navController: NavController) {
                     com.example.thefinaldedication.R.drawable.blouse,
                     listOf("Women")
                 ),
-                )
+            )
             val filteredItems = laundryItems.filter { item ->
                 filterCategories[selectedFilter] in item.categories &&
                         item.name.contains(searchQuery.value, ignoreCase = true)
@@ -187,12 +179,8 @@ fun Laundry( navController: NavController) {
             filteredItems.forEach { item: LaundryItem ->
                 LaundryListItem(
                     item = item,
-                    onAdd = { itemCountState.intValue = itemCountState.intValue + 1 },
-                    onRemove = {
-                        if (itemCountState.intValue > 0) {
-                            itemCountState.intValue = itemCountState.intValue - 1
-                        }
-                    }
+                    onAdd = { cartViewModel.addItem(CartItem(item.name, "Laundry Service", item.price, 1)) },
+                    onRemove = { cartViewModel.removeItem(CartItem(item.name, "Laundry Service", item.price, 1)) }
                 )
                 Spacer(modifier = Modifier.size(12.dp))
             }
@@ -203,5 +191,7 @@ fun Laundry( navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun LaundryPreview() {
-    Laundry(navController = NavController(LocalContext.current))
+    val navController = rememberNavController()
+    val cartViewModel = CartViewModel()
+    Laundry(navController = navController, cartViewModel = cartViewModel)
 }
