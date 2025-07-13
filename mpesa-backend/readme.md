@@ -1,4 +1,5 @@
-✅ WHAT YOU'VE SUCCESSFULLY DONE
+✅ WHAT I HAVE SUCCESSFULLY DONE
+
 🔹 1. Backend Setup (Node.js + Express)
 Created a backend project: mpesa-backend
 
@@ -10,6 +11,7 @@ Wrote an index.js and stkpush.js file to handle:
 
 /callback → receives M-Pesa's payment status
 
+
 🔹 2. Environment Configuration
 Created a .env file to store:
 
@@ -20,6 +22,7 @@ CONSUMER_SECRET
 PASSKEY (for shortcode 174379)
 
 CALLBACK_URL (public Ngrok URL)
+
 
 PORT
 
@@ -34,7 +37,8 @@ bash
 Copy
 Edit
 ngrok http 3000
-Got a public URL like https://345b8d1eb0fd.ngrok-free.app
+Got a public URL like https://abc.ngrok-free.app
+
 
 🔹 4. Connected Android App to Backend
 Your Kotlin PaymentViewModel is correctly sending the STK push to the Node.js backend using Retrofit.
